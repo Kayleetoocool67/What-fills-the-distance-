@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>What Fills The Distance Between Us</title>
+<style>
+:root{--ink:#273449;--muted:#66758b;--paper:#fffdf8;--blue:#dce8f1;--rose:#f2dfe1;--lav:#e9e4f2;--line:#e8e1d7;--shadow:0 12px 32px #26364a16}
+*{box-sizing:border-box}body{margin:0;background:#f4f0e9;color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+header{padding:34px 20px 22px;text-align:center;background:linear-gradient(120deg,#e4edf3,#f7e9e8 55%,#eee8f4);border-bottom:1px solid #fff}
+.eyebrow{font:700 11px/1.4 Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#63758b}
+h1{font-size:clamp(34px,7vw,58px);font-weight:500;margin:8px 0 6px;letter-spacing:-.04em}
+header p{margin:0;color:#637084;font-style:italic}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:14px 12px;background:#fffdf8;position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line)}
+nav button,.action{border:1px solid #d9d4cc;background:#fff;border-radius:999px;padding:9px 14px;color:var(--ink);cursor:pointer;font:600 12px Arial,sans-serif}
+nav button.active,nav button:hover,.action:hover{background:#dce8f1;border-color:#c3d4e2}
+main{max-width:1000px;margin:28px auto;padding:0 18px 60px}
+.page{display:none}.page.active{display:block}
+.paper{background:var(--paper);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:clamp(20px,4vw,38px);position:relative}
+.paper:before{content:"";position:absolute;inset:8px;border:1px dashed #e5d9ca;border-radius:4px;pointer-events:none}
+h2{font-size:32px;font-weight:500;margin:0 0 8px}h3{font-size:21px;font-weight:500;margin:0 0 8px}
+.lead{font-size:18px;line-height:1.65;color:#566579}
+.small{font:12px Arial,sans-serif;color:var(--muted)}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:20px}
+.polaroid{background:white;padding:12px 12px 36px;box-shadow:0 8px 22px #24364a20;transform:rotate(2deg);max-width:330px;margin:8px auto}
+.photo-placeholder{height:210px;background:linear-gradient(135deg,#dce8f1,#f1dfe2);display:grid;place-items:center;color:#65768a;text-align:center;padding:20px;font:13px Arial,sans-serif}
+.polaroid p{text-align:center;margin:12px 0 0;font-style:italic}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
+.tile{display:block;text-align:left;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px;min-height:125px;box-shadow:0 5px 16px #24364a0c;cursor:pointer}
+.tile:nth-child(2){background:#f8eeee}.tile:nth-child(3){background:#edf3f7}.tile:nth-child(4){background:#f1edf7}
+.tile strong{display:block;font-size:20px;font-weight:500;margin-bottom:8px}.tile span{font:13px/1.5 Arial,sans-serif;color:#657184}
+.note{background:#fff;padding:20px;border-left:4px solid #c5d6e3;margin:14px 0;box-shadow:0 4px 14px #26364a0c}
+.note:nth-child(even){border-left-color:#e5c9cc}.note p{line-height:1.65;margin:8px 0}
+.envelopes,.jokes,.memory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
+.envelope{border:1px solid #dfd4c8;border-radius:8px;padding:20px;background:linear-gradient(145deg,#fff,#f7eeee);cursor:pointer;text-align:center}
+.envelope .flap{font-size:30px}.reveal{display:none;margin-top:12px;font-style:italic;line-height:1.6}.envelope.open .reveal{display:block}
+.joke{background:#fff;border-radius:8px;padding:18px;border:1px solid var(--line);line-height:1.6}
+.memory{background:#fff;padding:10px 10px 18px;box-shadow:var(--shadow);transform:rotate(-1deg)}
+.memory:nth-child(even){transform:rotate(1.5deg)}.memory .photo-placeholder{height:155px}.memory p{text-align:center;font-style:italic;margin:12px 0 0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.answer{font-size:20px;font-style:italic;margin-top:16px;min-height:45px}
+footer{text-align:center;color:#8993a0;font:12px Arial,sans-serif;padding:28px}
+
+.welcome-screen{min-height:100svh;display:grid;place-items:center;padding:28px 18px;background:
+ radial-gradient(circle at 12% 18%,#f5dfe3 0 5px,transparent 6px),
+ radial-gradient(circle at 87% 22%,#dce8f1 0 7px,transparent 8px),
+ radial-gradient(circle at 18% 82%,#e8cfd2 0 5px,transparent 6px),
+ linear-gradient(135deg,#dce8f1 0%,#edf0f3 45%,#f7e6e7 100%);}
+.welcome-card{width:min(680px,100%);background:#fffdf8;border:1px solid #e7d9d6;border-radius:12px;
+ box-shadow:0 22px 60px #26364a20;padding:clamp(28px,6vw,58px);text-align:center;position:relative;overflow:hidden}
+.welcome-card:before{content:"";position:absolute;inset:12px;border:1px dashed #d8c8c5;border-radius:8px;pointer-events:none}
+.welcome-card:after{content:"♡";position:absolute;right:30px;top:22px;color:#d99aa5;font-size:27px;transform:rotate(12deg)}
+.welcome-stamp{display:inline-block;padding:7px 13px;border-radius:999px;background:#e8eff5;color:#526b84;
+ font:700 10px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+.welcome-title{font-size:clamp(34px,7vw,54px);font-weight:500;line-height:1.08;letter-spacing:-.04em;color:#2e4964;margin:22px auto 14px;max-width:560px}
+.welcome-copy{max-width:480px;margin:0 auto;color:#657184;font-size:17px;line-height:1.75}
+.welcome-signoff{margin:22px 0 26px;color:#b46f7b;font-style:italic}
+.enter-button{border:0;border-radius:999px;padding:14px 27px;background:#486985;color:white;font:700 13px Arial,sans-serif;
+ letter-spacing:.04em;cursor:pointer;box-shadow:0 6px 15px #48698530;transition:transform .2s,background .2s}
+.enter-button:hover{background:#35536e;transform:translateY(-2px)}
+.welcome-footer{margin-top:24px;color:#9a8e91;font:11px Arial,sans-serif;letter-spacing:.08em}
+body.welcome-open{overflow:hidden}
+body.welcome-open header,body.welcome-open nav,body.welcome-open main,body.welcome-open footer{display:none}
+body.welcome-entered .welcome-screen{display:none}
+.home-note{background:#f7edf0;border-left:4px solid #d99aa5;padding:17px 20px;margin-top:18px;border-radius:3px;color:#5e5360;line-height:1.7}
+.home-note strong{color:#9d6470}
+
+@media(max-width:650px){.hero-grid{grid-template-columns:1fr}.tiles,.envelopes,.jokes,.memory-grid{grid-template-columns:1fr}nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap}nav button{white-space:nowrap}}
+</style>
+<style>
+#edit-launch{position:fixed;right:14px;bottom:14px;z-index:20;border:0;border-radius:999px;background:#405f7c;color:#fff;padding:12px 16px;font:700 13px Arial,sans-serif;box-shadow:0 6px 22px #26364a35;cursor:pointer}
+#editor{display:none;position:fixed;inset:0;z-index:100;background:#f4f0e9;overflow:auto;padding:14px;font-family:Arial,sans-serif;color:#273449}
+#editor.open{display:block}.editor-shell{max-width:760px;margin:0 auto;background:#fffdf8;border:1px solid #e8e1d7;border-radius:14px;padding:18px;box-shadow:0 12px 32px #26364a16}
+.editor-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.editor-top h2{font:24px Georgia,serif;margin:0}.editor-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.editor-tabs button,.editor-btn{border:1px solid #d9d4cc;background:#fff;border-radius:999px;padding:10px 14px;color:#273449;font-weight:700;cursor:pointer}.editor-tabs button.active,.editor-btn.primary{background:#405f7c;color:#fff;border-color:#405f7c}.editor-panel{display:none}.editor-panel.active{display:block}.editor-field{display:block;margin:13px 0}.editor-field span{display:block;font-size:12px;font-weight:700;color:#66758b;margin-bottom:6px}.editor-field textarea,.editor-field input,.editor-field select{width:100%;border:1px solid #d9d4cc;border-radius:9px;padding:11px;font:15px Arial,sans-serif;background:white;color:#273449}.editor-field textarea{min-height:76px;resize:vertical}.editor-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.editor-hint{font-size:13px;line-height:1.5;color:#66758b}.editor-status{font-size:13px;color:#526b84;min-height:20px;margin:10px 0}.editor-card{padding:12px;border:1px solid #e8e1d7;border-radius:10px;margin:12px 0;background:#fff}.editor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.editor-close{font-size:24px;border:0;background:transparent;cursor:pointer;color:#66758b}.editor-hidden{display:none!important}
+.custom-memory img{width:100%;height:155px;object-fit:cover;display:block}.custom-page .paper{margin-bottom:16px}
+@media(max-width:560px){#editor{padding:8px}.editor-shell{padding:14px}.editor-row{grid-template-columns:1fr}}
+</style></head>
+<body class="welcome-open">
+<div class="welcome-screen" id="welcomeScreen">
+<div class="welcome-card">
+<div class="welcome-stamp" data-edit-key="text_001" data-edit-page="welcome">a little something for you, Nat</div>
+<div class="welcome-title" data-edit-key="text_002" data-edit-page="welcome">What Fills The Distance Between Us</div>
+<p class="welcome-copy" data-edit-key="text_003" data-edit-page="welcome">I think I might've out-nerded you.</p>
+<p class="welcome-copy" data-edit-key="text_004" data-edit-page="welcome">I made you a whole little corner of the internet — full of notes, nonsense, memories, and tiny reminders that even when we're far apart, you're never far from my thoughts.</p>
+<p class="welcome-signoff" data-edit-key="text_005" data-edit-page="welcome">Come explore. I made this just for you. ♡</p>
+<button class="enter-button" id="enterSite">Come on in ♡</button>
+<div class="welcome-footer">BLUE SKIES · PINK NOTES · A LITTLE BIT OF US</div>
+</div>
+</div>
+<header>
+<div class="eyebrow" data-edit-key="text_006" data-edit-page="welcome">a tiny corner of the internet</div>
+<h1 data-edit-key="text_014" data-edit-page="welcome">What Fills The Distance Between Us</h1>
+<p data-edit-key="text_015" data-edit-page="welcome">For whenever you want a little piece of me.</p>
+</header>
+<nav aria-label="Main navigation">
+<button class="active" data-page="home">Home</button>
+<button data-page="letters">Letters</button>
+<button data-page="open">Open When...</button>
+<button data-page="jokes">Joke Department</button>
+<button data-page="memories">Our Memories</button>
+<button data-page="little">Little Things</button>
+<button data-page="bored">I'm Bored</button>
+</nav>
+<main>
+<section class="page active" id="home">
+<div class="hero-grid">
+<div class="paper">
+<div class="eyebrow" data-edit-key="text_007" data-edit-page="home">welcome, you</div>
+<h2 data-edit-key="text_016" data-edit-page="home">Hi, you. ♡</h2>
+<p class="lead" data-edit-key="text_030" data-edit-page="home">I made you a little place to visit whenever you feel like it. There are notes, nonsense, memories, and probably a few things that will make you roll your eyes.</p>
+<p data-edit-key="text_031" data-edit-page="home">Look around. There's no order to any of it. Just little pieces of us, collected in one place.</p>
+<div class="small">P.S. More things will appear here as I add them.</div>
+</div>
+<div class="polaroid" style="background:#fff8f7;max-width:330px;padding:25px 20px 30px;transform:rotate(2deg);align-self:center">
+<div style="font-size:34px;text-align:center;color:#bd7b87">♡</div>
+<div style="text-align:center;color:#405c76;font-size:23px;line-height:1.35;margin:14px 0">A little reminder</div>
+<p style="font-size:16px;line-height:1.6">You're my favourite notification, my favourite distraction, and one of my favourite people.</p>
+<div style="text-align:center;color:#bd7b87;margin-top:12px">— always, me</div>
+</div>
+</div>
+<div class="tiles">
+<button class="tile" data-go="letters"><strong data-edit-key="text_085" data-edit-page="home">✉ Letters &amp; little notes</strong><span data-edit-key="text_090" data-edit-page="home">For the things I want you to know, even when we're far apart.</span></button>
+<button class="tile" data-go="open"><strong data-edit-key="text_086" data-edit-page="home">♡ Open when...</strong><span data-edit-key="text_091" data-edit-page="home">Pick an envelope. It was made for a certain kind of day.</span></button>
+<button class="tile" data-go="jokes"><strong data-edit-key="text_087" data-edit-page="home">☻ The joke department</strong><span data-edit-key="text_092" data-edit-page="home">Questionable jokes. Excellent nonsense.</span></button>
+<button class="tile" data-go="memories"><strong data-edit-key="text_088" data-edit-page="home">▧ Our little memories</strong><span data-edit-key="text_093" data-edit-page="home">A tiny album of moments worth keeping.</span></button>
+<button class="tile" data-go="little"><strong data-edit-key="text_089" data-edit-page="home">♡ The little things</strong><span data-edit-key="text_094" data-edit-page="home">The details about you that I hope you never forget.</span></button>
+</div>
+</section>
+<section class="page" id="letters">
+<div class="paper"><div class="eyebrow" data-edit-key="text_008" data-edit-page="letters">written for you</div><h2 data-edit-key="text_017" data-edit-page="letters">Letters &amp; little notes</h2><p class="lead" data-edit-key="text_032" data-edit-page="letters">A few words for you to find whenever you need them.</p>
+<div class="note"><div class="small" data-edit-key="text_040" data-edit-page="letters">A little reminder</div><p data-edit-key="text_045" data-edit-page="letters">Even on the ordinary days, you're someone I feel lucky to know. I hope today gives you at least one really good reason to smile.</p></div>
+<div class="note"><div class="small" data-edit-key="text_041" data-edit-page="letters">For no particular reason</div><p data-edit-key="text_046" data-edit-page="letters">This is your reminder that I am still very much cheering you on, from wherever I happen to be.</p></div>
+
+</div>
+</section>
+<section class="page" id="open">
+<div class="paper"><div class="eyebrow" data-edit-key="text_009" data-edit-page="open">choose an envelope</div><h2 data-edit-key="text_018" data-edit-page="open">Open when...</h2><p class="lead" data-edit-key="text_033" data-edit-page="open">Tap one. No peeking at all of them at once. (Or do. I'm not there to stop you.)</p>
+<div class="envelopes">
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_050" data-edit-page="open">You're missing me</strong><div class="reveal" data-edit-key="text_058" data-edit-page="open">I wish I could make the distance disappear for a minute. Until then, imagine me saving you the best seat and asking about your day. ♡</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_051" data-edit-page="open">You've had a rough day</strong><div class="reveal" data-edit-key="text_059" data-edit-page="open">You don't have to turn the day around all at once. Take a breath, be gentle with yourself, and remember that one hard day doesn't define you.</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_052" data-edit-page="open">You're bored</strong><div class="reveal" data-edit-key="text_060" data-edit-page="open">I have a very important question: if we opened a tiny cafe together, what ridiculous name would we give it?</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_053" data-edit-page="open">You need a reminder</strong><div class="reveal" data-edit-key="text_061" data-edit-page="open">You matter to me on the exciting days, the boring days, and all the in-between ones.</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_054" data-edit-page="open">You can't sleep</strong><div class="reveal" data-edit-key="text_062" data-edit-page="open">If I could, I'd stay up with you until your thoughts got quieter. Since I can't do that from here, just know there's someone out there who cares about you an unreasonable amount. Try to get comfortable, unclench your shoulders, and let tomorrow wait until tomorrow. ♡</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_055" data-edit-page="open">You need a laugh</strong><div class="reveal" data-edit-key="text_063" data-edit-page="open">First of all, this is a very serious matter. I regret to inform you that you're dating someone who will absolutely send you the dumbest thought they have at the worst possible time. Unfortunately for you, that person is me. Consider this your warning. Now go find something that makes you laugh. ♡</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_056" data-edit-page="open">You need to feel loved</strong><div class="reveal" data-edit-key="text_064" data-edit-page="open">You don't have to earn the good parts of being cared about. You don't have to be funny, happy, easy, or having your best day. You get to be exactly where you are, and you still matter so much to me. I hope you never forget that.</div></button>
+<button class="envelope"><div class="flap">✉</div><strong data-edit-key="text_057" data-edit-page="open">You're thinking of me</strong><div class="reveal" data-edit-key="text_065" data-edit-page="open">Well, that's convenient, because there's a pretty good chance I was thinking about you too. I hope something today reminded you of us — even if it was something completely stupid. Save it for me. I want to hear about it later. ♡</div></button>
+</div>
+</div>
+</section>
+<section class="page" id="jokes">
+<div class="paper"><div class="eyebrow" data-edit-key="text_010" data-edit-page="jokes">certified nonsense</div><h2 data-edit-key="text_019" data-edit-page="jokes">The joke department</h2><p class="lead" data-edit-key="text_034" data-edit-page="jokes">A very serious collection of very unserious material.</p>
+<div class="jokes">
+<div class="joke"><div class="small" data-edit-key="text_066" data-edit-page="jokes">EXHIBIT #001</div><strong data-edit-key="text_071" data-edit-page="jokes">The Microwave Incident</strong><p data-edit-key="text_075" data-edit-page="jokes">A historical event. A questionable decision. A moment that will never be allowed to be forgotten. Some people use microwaves to heat food. Natalie decided to challenge the laws of common sense. This incident will be brought up for the rest of our lives.</p></div>
+<div class="joke"><div class="small" data-edit-key="text_067" data-edit-page="jokes">EXHIBIT #002</div><strong data-edit-key="text_072" data-edit-page="jokes">Operation: Don't Be a Snowflake</strong><p data-edit-key="text_076" data-edit-page="jokes">A nickname passed down from coach and lovingly continued by me. Remember: no crumbling today, Snowflake. I've got a reputation to maintain as your personal heckler.</p></div>
+<div class="joke"><div class="small" data-edit-key="text_068" data-edit-page="jokes">EXHIBIT #003</div><strong data-edit-key="text_073" data-edit-page="jokes">Natalie vs. Gravity</strong><p data-edit-key="text_077" data-edit-page="jokes">Somewhere between softball practice and me watching, gravity keeps winning. The rivalry continues.</p><div style="background:#edf3f7;border-radius:8px;padding:13px;text-align:center;margin-top:12px"><div style="font-size:12px;letter-spacing:.12em;font-family:Arial,sans-serif;color:#66758b">OFFICIAL SCOREBOARD</div><div style="font-size:22px;margin:8px 0">Natalie: 0   ·   Gravity: 1,000</div><div class="small" data-edit-key="text_069" data-edit-page="jokes">Status: An ongoing investigation. Next match: softball practice.</div></div></div>
+<div class="joke"><div class="small" data-edit-key="text_070" data-edit-page="jokes">A VERY IMPORTANT FEATURE</div><strong data-edit-key="text_074" data-edit-page="jokes">Natalie's Defense</strong><p data-edit-key="text_078" data-edit-page="jokes">Every accused person deserves a chance to explain themselves. Even Natalie.</p><button class="action" id="defense">Hear Natalie's defense</button><div class="answer" id="defenseAnswer" style="font-size:16px;min-height:24px"></div></div>
+</div>
+</div>
+</section>
+<section class="page" id="memories">
+<div class="paper"><div class="eyebrow" data-edit-key="text_011" data-edit-page="memories">little things worth keeping</div><h2 data-edit-key="text_020" data-edit-page="memories">Our memories</h2><p class="lead" data-edit-key="text_035" data-edit-page="memories">A place for photos, screenshots, dates, and the stories behind them.</p>
+<div class="memory-grid">
+<div class="memory"><div class="photo-placeholder">Add a photo here</div><p data-edit-key="text_079" data-edit-page="memories">write a little caption</p></div>
+<div class="memory"><div class="photo-placeholder">Add another photo</div><p data-edit-key="text_080" data-edit-page="memories">another favourite moment</p></div>
+<div class="memory"><div class="photo-placeholder">A screenshot or picture</div><p data-edit-key="text_081" data-edit-page="memories">something that makes me laugh</p></div>
+<div class="memory"><div class="photo-placeholder">A place we remember</div><p data-edit-key="text_082" data-edit-page="memories">somewhere special</p></div>
+<div class="memory"><div class="photo-placeholder" style="background:linear-gradient(135deg,#dce8f1,#e9e4f2)">🎬 Project Hail Mary</div><p data-edit-key="text_083" data-edit-page="memories">Our first FaceTime. You told me to watch this movie, and somehow you managed to make someone who never cries cry. I'll always remember that little first with you.</p></div>
+<div class="memory"><div class="photo-placeholder" style="background:linear-gradient(135deg,#f5e6e8,#dce8f1)">🐷 A very important pig</div><p data-edit-key="text_084" data-edit-page="memories">You, your pig stuffed animal, and the bedtime routine that I hope never changes. Even the pig has a permanent place in your life.</p></div>
+</div>
+
+</div>
+</section>
+<section class="page" id="little">
+<div class="paper"><div class="eyebrow" data-edit-key="text_012" data-edit-page="little">the little things I'll never forget</div><h2 data-edit-key="text_021" data-edit-page="little">The things I love about you</h2><p class="lead" data-edit-key="text_037" data-edit-page="little">It's not just the big moments. It's the little things that make you you.</p>
+<div class="note"><div class="small" data-edit-key="text_042" data-edit-page="little">YOUR EYES</div><p data-edit-key="text_047" data-edit-page="little">I don't think you understand how much I love your eyes. There's just something about them that I can't quite put into words. I could look at them for ages and still not get tired of it.</p></div>
+<div class="note"><div class="small" data-edit-key="text_043" data-edit-page="little">YOUR LAUGH</div><p data-edit-key="text_048" data-edit-page="little">I love your laugh — especially when something gets you laughing so hard that you can't stop. The kind of laugh that makes everyone else start laughing too, even if they don't know what was so funny. I hope I get to be the reason for it a million more times.</p></div>
+<div class="note"><div class="small" data-edit-key="text_044" data-edit-page="little">YOU AND YOUR LITTLE PIGGY</div><p data-edit-key="text_049" data-edit-page="little">I find it ridiculously adorable that you never fall asleep without cuddling your pig stuffed animal. You can give me a hard time all day, but when it's bedtime, that pig better be right there. I hope you never outgrow the little things that make you you.</p></div>
+<p class="small" data-edit-key="text_038" data-edit-page="little">If I could keep one sound forever, yours would be pretty high on the list. ♡</p>
+</div>
+</section>
+<section class="page" id="bored">
+<div class="paper"><div class="eyebrow" data-edit-key="text_013" data-edit-page="bored">press for a distraction</div><h2 data-edit-key="text_022" data-edit-page="bored">I'm bored.</h2><p class="lead" data-edit-key="text_039" data-edit-page="bored">A tiny button-powered distraction menu.</p>
+<div class="actions"><button class="action" id="random">Give me something</button><button class="action" id="question">Ask me a question</button><button class="action" id="challenge">Give me a tiny challenge</button></div>
+<div class="answer" id="answer">Choose a button. Your entertainment is in my hands now.</div>
+</div>
+</section>
+</main>
+<footer>made with care, just for you ♡</footer>
+<script>
+document.getElementById('enterSite').addEventListener('click',()=>{
+ document.body.classList.remove('welcome-open');
+ document.body.classList.add('welcome-entered');
+ window.scrollTo({top:0,behavior:'instant'});
+});
+const pages=[...document.querySelectorAll('.page')], nav=[...document.querySelectorAll('nav button')];
+function show(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});}
+nav.forEach(b=>b.addEventListener('click',()=>show(b.dataset.page)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.go)));
+document.querySelectorAll('.envelope').forEach(b=>b.addEventListener('click',()=>b.classList.toggle('open')));
+const sets={
+ random:["Sending you an imaginary forehead kiss. Redeemable whenever distance allows.","Breaking news: you're still pretty great. More at 11.","Reminder: drink some water and tell me one good thing about today.","If I were there, I'd be stealing at least one of your snacks."],
+ question:["If we could teleport anywhere for one hour, where are we going?","What's a tiny thing that instantly improves your day?","What would our ridiculously specific reality show be called?","If we had a pet together, what would we name it?"],
+ challenge:["Find the funniest photo in your camera roll.","Send me a song that matches your current mood.","Invent a new holiday and tell me what we celebrate.","Give the nearest object a dramatic backstory."]
+};
+function pick(key){const a=sets[key];document.getElementById('answer').textContent=a[Math.floor(Math.random()*a.length)];}
+document.getElementById('random').onclick=()=>pick('random');
+document.getElementById('question').onclick=()=>pick('question');
+document.getElementById('challenge').onclick=()=>pick('challenge');
+const defenses=["The fork was conducting a very important science experiment.","I wasn't crumbling. I was simply testing the field conditions.","Gravity started it. I am the victim here.","Your Honor, my client would like a snack and a rematch."];
+document.getElementById('defense').onclick=()=>{document.getElementById('defenseAnswer').textContent=defenses[Math.floor(Math.random()*defenses.length)];};
+</script>
+<button id="edit-launch" type="button">✎ Edit scrapbook</button><div aria-hidden="true" id="editor">
+<div class="editor-shell">
+<div class="editor-top"><h2>Scrapbook editor ♡</h2><button aria-label="Close" class="editor-close" id="editor-close">×</button></div>
+<div id="login-area">
+<p>Just for you. Enter your private editing password to make changes. Natalie can still visit the regular scrapbook without signing in.</p>
+<label class="editor-field"><span>Editing password</span><input autocomplete="current-password" id="edit-password" placeholder="Your private password" type="password"/></label>
+<div class="editor-actions"><button class="editor-btn primary" id="login-button">Open my editor</button></div>
+<p class="editor-hint">Your password is checked securely by the website. Don't send it to anyone or put it in a message.</p>
+</div>
+<div class="editor-hidden" id="workspace">
+<div class="editor-tabs"><button class="active" data-tab="words">Words</button><button data-tab="design">Design</button><button data-tab="add">Add to it</button></div>
+<section class="editor-panel active" id="panel-words">
+<p class="editor-hint">Choose a page, then change any text below. Your existing scrapbook stays in place.</p>
+<label class="editor-field"><span>Choose a page</span><select id="word-page"><option value="all">All pages</option><option value="welcome">Welcome screen</option><option value="home">Home</option><option value="letters">Letters</option><option value="open">Open When</option><option value="jokes">Joke Department</option><option value="memories">Our Memories</option><option value="little">Little Things</option><option value="bored">I'm Bored</option></select></label>
+<div id="word-fields"></div>
+</section>
+<section class="editor-panel" id="panel-design">
+<p class="editor-hint">Try a different scrapbook colour palette or font. Changes apply to the public page too.</p>
+<div class="editor-row"><label class="editor-field"><span>Paper colour</span><input id="theme-paper" type="color" value="#fffdf8"/></label><label class="editor-field"><span>Soft blue</span><input id="theme-blue" type="color" value="#dce8f1"/></label></div>
+<div class="editor-row"><label class="editor-field"><span>Blush pink</span><input id="theme-rose" type="color" value="#f2dfe1"/></label><label class="editor-field"><span>Text colour</span><input id="theme-ink" type="color" value="#273449"/></label></div>
+<label class="editor-field"><span>Font style</span><select id="theme-font"><option value="Georgia, 'Times New Roman', serif">Classic scrapbook</option><option value="Arial, sans-serif">Clean &amp; simple</option><option value="'Trebuchet MS', sans-serif">Soft &amp; modern</option></select></label>
+</section>
+<section class="editor-panel" id="panel-add">
+<p class="editor-hint">Add a new note to a page, make a new page, or add a photo memory. Photos are saved with the scrapbook online.</p>
+<div class="editor-card"><h3>New note or memory</h3>
+<label class="editor-field"><span>Where should it go?</span><select id="add-target"><option value="letters">Letters</option><option value="jokes">Joke Department</option><option value="memories">Our Memories</option><option value="little">Little Things</option></select></label>
+<label class="editor-field"><span>Title</span><input id="add-title" maxlength="90" placeholder="A new little memory"/></label>
+<label class="editor-field"><span>What do you want it to say?</span><textarea id="add-body" maxlength="3000" placeholder="Write whatever you want to add..."></textarea></label>
+<button class="editor-btn primary" id="add-note">Add this to the scrapbook</button>
+</div>
+<div class="editor-card"><h3>Create a whole new page</h3>
+<label class="editor-field"><span>Page name</span><input id="new-page-title" maxlength="45" placeholder="Our favourite things"/></label>
+<label class="editor-field"><span>First message</span><textarea id="new-page-body" maxlength="3000" placeholder="Start your new page..."></textarea></label>
+<button class="editor-btn primary" id="add-page">Create new page</button>
+</div>
+<div class="editor-card"><h3>Add a photo memory</h3>
+<label class="editor-field"><span>Choose a photo from your iPhone</span><input accept="image/*" id="photo-file" type="file"/></label>
+<label class="editor-field"><span>Caption</span><input id="photo-caption" maxlength="180" placeholder="A moment I want to remember"/></label>
+<button class="editor-btn primary" id="add-photo">Add photo to Our Memories</button>
+<p class="editor-hint">For a smoother upload, choose a regular photo rather than a very large video or file.</p>
+</div>
+</section>
+<div class="editor-actions"><button class="editor-btn primary" id="save-all">Save changes</button><button class="editor-btn" id="logout-button">Log out</button></div>
+<div class="editor-status" id="editor-status" role="status"></div>
+</div>
+</div>
+</div><script>
+(()=>{
+const API='/.netlify/functions/scrapbook';
+const $=id=>document.getElementById(id);
+let password='',data={overrides:{},theme:{},cards:[],pages:[],photos:[]};
+const textNodes=[...document.querySelectorAll('[data-edit-key]')];
+const pageLabels={welcome:'Welcome screen',home:'Home',letters:'Letters',open:'Open When',jokes:'Joke Department',memories:'Our Memories',little:'Little Things',bored:"I'm Bored"};
+function status(t){$('editor-status').textContent=t||'';}
+function apply(){
+ textNodes.forEach(el=>{const v=data.overrides?.[el.dataset.editKey];if(typeof v==='string')el.textContent=v;});
+ const t=data.theme||{}; if(t.paper)document.documentElement.style.setProperty('--paper',t.paper);if(t.blue)document.documentElement.style.setProperty('--blue',t.blue);if(t.rose)document.documentElement.style.setProperty('--rose',t.rose);if(t.ink)document.documentElement.style.setProperty('--ink',t.ink);if(t.font)document.body.style.fontFamily=t.font;
+ renderAdded();
+}
+function renderAdded(){
+ document.querySelectorAll('.added-content,.added-page,.added-memory').forEach(n=>n.remove());
+ (data.cards||[]).forEach(c=>{const target=document.querySelector('#'+CSS.escape(c.target)+' .paper');if(!target)return;const box=document.createElement('div');box.className='note added-content';const h=document.createElement('div');h.className='small';h.textContent=c.title;const p=document.createElement('p');p.textContent=c.body;box.append(h,p);target.append(box);});
+ (data.pages||[]).forEach((p,i)=>{const id='extra-page-'+i;let sec=document.getElementById(id);if(!sec){const b=document.createElement('button');b.textContent=p.title;b.dataset.page=id;document.querySelector('nav').append(b);b.addEventListener('click',()=>showPage(id));sec=document.createElement('section');sec.className='page custom-page';sec.id=id;const paper=document.createElement('div');paper.className='paper';const h=document.createElement('h2');const body=document.createElement('p');body.className='lead';paper.append(h,body);sec.append(paper);document.querySelector('main').append(sec);}sec.querySelector('h2').textContent=p.title;sec.querySelector('.lead').textContent=p.body;const navButton=[...document.querySelectorAll('nav button')].find(b=>b.dataset.page===id);if(navButton)navButton.textContent=p.title;
+ });
+ (data.photos||[]).forEach(ph=>{const box=document.createElement('div');box.className='memory added-memory';const img=document.createElement('img');img.src=ph.data;img.alt=ph.caption||'Scrapbook photo';const p=document.createElement('p');p.textContent=ph.caption||'';box.append(img,p);document.querySelector('#memories .memory-grid')?.append(box);});
+}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',(b.dataset.page||'')===id));window.scrollTo({top:0,behavior:'smooth'});}
+function buildFields(){const container=$('word-fields');container.innerHTML='';const filter=$('word-page').value;let count=0;
+ textNodes.forEach(el=>{const page=el.dataset.editPage||'home';if(filter!=='all'&&filter!==page)return;const label=document.createElement('label');label.className='editor-field';const span=document.createElement('span');span.textContent=(pageLabels[page]||page)+' · '+(el.textContent.trim().slice(0,55)||'Text');const ta=document.createElement('textarea');ta.value=data.overrides?.[el.dataset.editKey]??el.textContent;ta.dataset.key=el.dataset.editKey;ta.addEventListener('input',()=>{data.overrides[ta.dataset.key]=ta.value;el.textContent=ta.value;});label.append(span,ta);container.append(label);count++;});
+ (data.pages||[]).forEach((p,i)=>{if(filter!=='all'&&filter!=='extra-page-'+i)return;const wrap=document.createElement('div');wrap.className='editor-card';const heading=document.createElement('strong');heading.textContent='New page: '+p.title;wrap.append(heading);[['Page name','title'],['Page message','body']].forEach(([label,key])=>{const l=document.createElement('label');l.className='editor-field';const sp=document.createElement('span');sp.textContent=label;const ta=document.createElement('textarea');ta.value=p[key]||'';ta.addEventListener('input',()=>{p[key]=ta.value;apply();});l.append(sp,ta);wrap.append(l);});container.append(wrap);count++;});
+ if(!count)container.textContent='No editable text on this page yet.';
+}
+function openEditor(){ $('editor').classList.add('open');$('editor').setAttribute('aria-hidden','false'); }
+function closeEditor(){ $('editor').classList.remove('open');$('editor').setAttribute('aria-hidden','true'); }
+$('edit-launch').addEventListener('click',openEditor);$('editor-close').addEventListener('click',closeEditor);
+$('login-button').addEventListener('click',async()=>{const p=$('edit-password').value;if(!p){status('Enter your editing password first.');return;}status('Checking…');try{const r=await fetch(API,{headers:{Authorization:'Bearer '+p}});if(!r.ok)throw new Error(r.status===401?'That password didn’t match. Try again.':'The editor is not connected yet.');data=await r.json();password=p;$('login-area').classList.add('editor-hidden');$('workspace').classList.remove('editor-hidden');apply();buildFields();$('theme-paper').value=data.theme?.paper||'#fffdf8';$('theme-blue').value=data.theme?.blue||'#dce8f1';$('theme-rose').value=data.theme?.rose||'#f2dfe1';$('theme-ink').value=data.theme?.ink||'#273449';$('theme-font').value=data.theme?.font||"Georgia, 'Times New Roman', serif";status('You’re in! Make your changes, then tap Save changes.');}catch(e){status(e.message||'Could not connect.');}});
+$('word-page').addEventListener('change',buildFields);
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.editor-panel').forEach(x=>x.classList.toggle('active',x.id==='panel-'+b.dataset.tab));}));
+['paper','blue','rose','ink'].forEach(k=>$('theme-'+k).addEventListener('input',e=>{data.theme=data.theme||{};data.theme[k]=e.target.value;apply();}));
+$('theme-font').addEventListener('change',e=>{data.theme.font=e.target.value;apply();});
+$('add-note').addEventListener('click',()=>{const title=$('add-title').value.trim(),body=$('add-body').value.trim();if(!title||!body){status('Add both a title and a message first.');return;}data.cards.push({target:$('add-target').value,title,body});$('add-title').value='';$('add-body').value='';apply();status('Added! Tap Save changes to publish it.');});
+$('add-page').addEventListener('click',()=>{const title=$('new-page-title').value.trim(),body=$('new-page-body').value.trim();if(!title||!body){status('Add a page name and a first message.');return;}data.pages.push({title,body});$('new-page-title').value='';$('new-page-body').value='';apply();status('Your new page is ready. Save to publish it.');});
+$('add-photo').addEventListener('click',()=>{const file=$('photo-file').files[0];if(!file){status('Choose a photo first.');return;}if(file.size>1400000){status('That photo is a little too large. Choose a smaller photo (under about 1.4 MB).');return;}const reader=new FileReader();reader.onload=()=>{data.photos.push({data:reader.result,caption:$('photo-caption').value.trim()});$('photo-file').value='';$('photo-caption').value='';apply();status('Photo added. Tap Save changes to publish it.');};reader.readAsDataURL(file);});
+$('save-all').addEventListener('click',async()=>{if(!password)return;status('Saving your scrapbook…');try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+password},body:JSON.stringify(data)});if(!r.ok)throw new Error(r.status===401?'Please log in again.':'Could not save right now.');status('Saved! Your live scrapbook now has these changes. ♡');}catch(e){status(e.message||'Save failed. Please try again.');}});
+$('logout-button').addEventListener('click',()=>{password='';$('edit-password').value='';$('workspace').classList.add('editor-hidden');$('login-area').classList.remove('editor-hidden');status('Logged out.');});
+// Load public saved changes automatically for every visitor.
+fetch(API).then(r=>r.ok?r.json():null).then(saved=>{if(saved){data=saved;apply();}}).catch(()=>{});
+})();
+</script></body>
+</html>

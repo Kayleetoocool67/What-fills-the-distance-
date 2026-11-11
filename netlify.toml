@@ -1,0 +1,10 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+  command = "npm install"
+
+[build.environment]
+  NODE_VERSION = "22.12.0"
+
+[functions]
+  node_bundler = "esbuild"
